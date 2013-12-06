@@ -30,7 +30,7 @@ string intToRoman(int num){
 }
 
 string intToRoman2(int num){
-    string tag = {"I", "V", "X", "L", "C", "D", "M"};
+    string tag[] = {"I", "V", "X", "L", "C", "D", "M"};
     int pivot = 1, index = 0;
     while (num / pivot > 9) {
         pivot*=10;
@@ -45,7 +45,7 @@ string intToRoman2(int num){
             continue;
         }
         else if ( digit == 4){
-            result += tag[index] + tag[inde+1];
+            result += tag[index] + tag[index+1];
             num -= 4*pivot;
         }
         else if ( digit >= 5 && digit < 9){
