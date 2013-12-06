@@ -8,3 +8,27 @@ Here is an example:
 S = "rabbbit", T = "rabbit"
 
 Return 3.*/
+
+int numDistinct(string S, string T){
+    
+    int s = S.size();
+    int t = T.size();
+    
+    if (s < t) return 0;
+    
+    int* count = new int[t+1]();
+    
+    count[0] = 1;
+    
+    for (int i = 1; i <= s; i++){
+        for (int j = t; j > 0; j--){
+            if (S[i-1] == T[j-1]) count[j] += count[j-1]; 
+        }
+    }
+    
+    int val = count[t];
+    
+    delete []count;
+    
+    return val;
+}
