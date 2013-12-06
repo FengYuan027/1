@@ -9,18 +9,18 @@ string intToRoman(int num){
   while (num > 0) {
     int digit = num % 10;
     if (digit > 0 && digit < 4 || digit > 5 && digit <9){
-      result = "" + tag[index] + result;
+      result = tag[index] + result;
       num--;
       continue;
     }
     else if (digit == 4) {
-      result = "" + tag[index] + tag[index+1] + result;
+      result = tag[index] + tag[index+1] + result;
     }
-    else if (index == 5)
-      result = "" + tag[index+1] + result;
+    else if (digit == 5) {
+      result = tag[index+1] + result;
     }
-    else if (index == 9) {
-      result = "" + tag[index] + tag[index+2] + result;
+    else if (digit == 9) {
+      result = tag[index] + tag[index+2] + result;
     }
     num /= 10;
     index += 2;
