@@ -1,5 +1,5 @@
 class Solution{
-  // Assume input is valid
+	// Assume input is valid
 	public int compute(String input) {
 		int current = 0, sign = 1, result = 0;
 		for (int i = 0; i < input.length(); i++) {
