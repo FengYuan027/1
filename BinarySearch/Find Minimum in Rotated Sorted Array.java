@@ -5,7 +5,7 @@ public class Solution {
     while (start < end) {
       if (nums[start] < nums[end]) return nums[start];
       int mid = start + (end - start)/2, val = nums[mid];
-      if (val > nums[end]) start = mid + 1;
+      if (val > nums[end]) start = mid + 1; // Remember to compare the end, rather than the start
       else end = mid;
     }
       return nums[start];
