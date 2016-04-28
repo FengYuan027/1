@@ -52,3 +52,21 @@ public class Solution3 {
         }
     }
 }
+
+public class Solution4 {
+    public List<List<Integer>> subsets(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> subsets = new ArrayList<List<Integer>>();
+        subsets.add(new LinkedList<Integer>());
+        for (int num : nums) {
+            List<List<Integer>> current = new ArrayList<List<Integer>>();
+            for (List<Integer> prev: subsets) {
+                List<Integer> subset = new LinkedList<Integer>(prev);
+                subset.add(num);
+                current.add(subset);
+            }
+            subsets.addAll(current);
+        }
+        return subsets;
+    }
+}
