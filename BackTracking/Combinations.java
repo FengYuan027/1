@@ -35,3 +35,30 @@ public class Solution2 {
         return result;
     }
 }
+
+public class Solution3 {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> combinations = new ArrayList<List<Integer>>();
+        if (n <= 0 || k <= 0 || k > n) return combinations;
+        int[] combination = new int[k];
+        int index = 0;
+        while (index >= 0) {
+            combination[index]++;
+            if (combination[index] > n) {
+                index--;
+            }
+            else {
+                if (index == k - 1) {
+                    List<Integer> list = new ArrayList<Integer>();
+                    for (int num : combination) list.add(num);
+                    combinations.add(list);
+                }
+                else {
+                    index++;
+                    combination[index] = combination[index-1];
+                }
+            }
+        }
+        return combinations;
+    }
+}
