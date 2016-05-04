@@ -14,7 +14,7 @@ Note:
 You can assume that you can always reach the last index.
 */
 
-public class Solution {
+public class Solution1 {
     public int jump(int[] nums) {
         int high = 0, step = 0;
         while (high < nums.length - 1) {
@@ -23,6 +23,22 @@ public class Solution {
                 nextHigh = Math.max(nums[i] + i, nextHigh);
             }
             step++;
+            high = nextHigh;
+        }
+        return step;
+    }
+}
+
+public class Solution2 {
+    public int jump(int[] nums) {
+        int low = 0, high = 0, step = 0;
+        while (high < nums.length - 1) {
+            int nextHigh = high + 1;
+            for (int i = low; i <= high; i++) {
+                nextHigh = Math.max(nums[i] + i, nextHigh);
+            }
+            step++;
+            low = high + 1;
             high = nextHigh;
         }
         return step;
