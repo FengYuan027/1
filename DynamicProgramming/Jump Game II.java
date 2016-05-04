@@ -44,3 +44,17 @@ public class Solution2 {
         return step;
     }
 }
+
+public class Solution3 {
+    public int jump(int[] nums) {
+        int step = 0, max = 0, currentMax = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            max = Math.max(max, nums[i] + i);
+            if (i == currentMax) {
+                step++;
+                currentMax = max;
+            }
+        }
+        return step;
+    }
+}
