@@ -7,6 +7,9 @@ Some examples:
 "abc" => false
 "1 a" => false
 "2e10" => true
+"e10" => false
+"1e" => false
+"1e1.5" => false
 
 Note: It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one. 
 
