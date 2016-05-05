@@ -14,7 +14,7 @@ return 4->5->1->2->3->NULL.
  *     ListNode(int x) { val = x; }
  * }
  */
-public class Solution {
+public class Solution1 {
     public ListNode rotateRight(ListNode head, int k) {
         if (head == null || head.next == null || k == 0 || (k%=getLength(head)) == 0) return head;
         ListNode start = head, end = head;
@@ -36,5 +36,26 @@ public class Solution {
             count++;
         }
         return count;
+    }
+}
+
+public class Solution2 {
+    public ListNode rotateRight(ListNode head, int k) {
+        if (k <= 0 || head == null || head.next == null) return head;
+        int length = 1;
+        ListNode tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+            length++;
+        }
+        if ((k%=length) > 0) {
+            tail.next = head;
+            for (int i = 0; i < length - k; i++) {
+                tail = tail.next;
+            }
+            head = tail.next;
+            tail.next = null;
+        }
+        return head;
     }
 }
