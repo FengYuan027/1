@@ -21,7 +21,7 @@ This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
-public class Solution {
+public class Solution1 {
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
         List<Interval> updated = new ArrayList<Interval>();
         boolean startInserted = false, endInserted = false;
@@ -55,5 +55,31 @@ public class Solution {
         }
         if (!startInserted) updated.add(newInterval);
         return updated;
+    }
+}
+
+public class Solution2 {
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        int index = 0;
+        List<Interval> inserted = new ArrayList<Interval>();
+        while (index < intervals.size() && intervals.get(index).end < newInterval.start) {
+            inserted.add(intervals.get(index++));
+        }
+        if (index == intervals.size() || intervals.get(index).start > newInterval.end) {
+            inserted.add(newInterval);
+        }
+        else {
+            Interval interval = new Interval(Math.min(newInterval.start, intervals.get(index).start),
+                                            Math.max(newInterval.end, intervals.get(index).end));
+            inserted.add(interval);
+            index++;
+            while (index < intervals.size() && intervals.get(index).start <= interval.end) {
+                interval.end = Math.max(interval.end, intervals.get(index++).end);
+            }
+        }
+        while (index < intervals.size()) {
+            inserted.add(intervals.get(index++));
+        }
+        return inserted;
     }
 }
