@@ -83,3 +83,23 @@ public class Solution2 {
         return inserted;
     }
 }
+
+public class Solution3 {
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        int index = 0;
+        List<Interval> inserted = new ArrayList<Interval>();
+        while (index < intervals.size() && intervals.get(index).end < newInterval.start) {
+            inserted.add(intervals.get(index++));
+        }
+        while (index < intervals.size() && intervals.get(index).start <= newInterval.end) {
+            newInterval.start = Math.min(newInterval.start, intervals.get(index).start);
+            newInterval.end = Math.max(newInterval.end, intervals.get(index).end);
+            index++;
+        }
+        inserted.add(newInterval);
+        while (index < intervals.size()) {
+            inserted.add(intervals.get(index++));
+        }
+        return inserted;
+    }
+}
