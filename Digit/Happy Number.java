@@ -11,7 +11,7 @@ Example: 19 is a happy number
 12 + 02 + 02 = 1
 */
 
-public class Solution {
+public class Solution1 {
     public boolean isHappy(int n) {
         if (n <= 0) return false;
         int slow = n, fast = next(n);
@@ -29,5 +29,22 @@ public class Solution {
             n /= 10;
         }
         return happy;
+    }
+}
+
+public class Solution2 {
+    public boolean isHappy(int n) {
+        if (n <= 0) return false;
+        HashSet<Integer> set = new HashSet<Integer>();
+        while (set.add(n)) {
+            int next = 0;
+            while (n > 0) {
+                next += (n%10) * (n%10);
+                n /= 10;
+            }
+            if (next == 1) return true;
+            else n = next;
+        }
+        return false;
     }
 }
