@@ -39,3 +39,33 @@ public class Solution2 {
         return depth;
     }
 }
+
+public class Solution3 {
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        Stack<TreeNode> s = new Stack<TreeNode>();
+        TreeNode prev = null;
+        int depth = 0, maxDepth = 0;
+        do {
+            while (root != null) {
+                s.push(root);
+                root = root.left;
+                depth++;
+            }
+            if (depth > maxDepth) maxDepth = depth;
+            while (root == null && !s.isEmpty()) {
+                root = s.peek();
+                if (root.right == null || prev != null && prev == root.right) {
+                    depth--;
+                    s.pop();
+                    prev = root;
+                    root = null;
+                }
+                else {
+                    root = root.right;
+                }
+            }
+        } while (root != null || !s.isEmpty());
+        return maxDepth;
+    }
+}
