@@ -27,3 +27,14 @@ public class Solution1 {
         nums[r] = t;
     }
 }
+
+public class Solution2 {
+    public int missingNumber(int[] nums) {
+        int mask = 0;
+        for (int i = 0; i < nums.length; i++) {
+            mask ^= nums[i];
+            mask ^= i;
+        }
+        return mask ^ nums.length;
+    }
+}
