@@ -38,3 +38,18 @@ public class Solution2 {
         return countNode(root.left) + countNode(root.right) + 1;
     }
 }
+
+public class Solution3 {
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> s = new Stack<TreeNode>();
+        do {
+            while (root != null) {
+                s.push(root);
+                root = root.left;
+            }
+            root = s.pop();
+            if (--k > 0) root = root.right;
+        } while (k > 0);
+        return root.val;
+    }
+}
