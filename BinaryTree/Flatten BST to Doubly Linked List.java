@@ -21,9 +21,9 @@ class Solution2 {
     private TreeNode prev = null;
     private TreeNode head = null;
     
-    public void flatten(TreeNode root) {
+    public TreeNode flatten(TreeNode root) {
         if (root == null) return;
-        flatten(root.left);
+        TreeNode leftHead = flatten(root.left);
         if (prev != null) {
             prev.right = root;
             root.left = prev;
@@ -33,5 +33,6 @@ class Solution2 {
         }
         prev = root;
         flatten(root.right);
+        return leftHead == null ? root : leftHead;
     }
 }
