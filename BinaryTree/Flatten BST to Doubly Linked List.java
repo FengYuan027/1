@@ -1,9 +1,8 @@
 
-class Solution {
-  
-  private TreeNode prev = null;
-  
-  public TreeNode flatten (TreeNode root) {
+class Solution1 {
+    private TreeNode prev = null;
+      
+    public TreeNode flatten (TreeNode root) {
         if (node == null) return null;
         flatten(root.right);
         TreeNode left = root.left;
@@ -15,5 +14,24 @@ class Solution {
         prev = root;
         if (left != null) return flatten(left);
         return root;
-  }
+    }
+}
+
+class Solution2 {
+    private TreeNode prev = null;
+    private TreeNode head = null;
+    
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+        flatten(root.left);
+        if (prev != null) {
+            prev.right = root;
+            root.left = prev;
+        }
+        else {
+            head = root;
+        }
+        prev = root;
+        flatten(root.right);
+    }
 }
