@@ -12,7 +12,7 @@ Notes:
 You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.
 */
 
-public class Solution {
+public class Solution1 {
     public boolean wordPattern(String _pattern, String _str) {
         char[] pattern = _pattern.toCharArray();
         String[] str = _str.split(" ");
@@ -33,6 +33,20 @@ public class Solution {
             else {
                 map1.put(c, s);
                 map2.put(s, c);
+            }
+        }
+        return true;
+    }
+}
+
+public class Solution2 {
+    public boolean wordPattern(String pattern, String _str) {
+        String[] str = _str.split(" ");
+        if (str.length != pattern.length()) return false;
+        Map map = new HashMap<>();
+        for (Integer i = 0; i < str.length; i++) {
+            if (map.put(pattern.charAt(i), i) != map.put(str[i], i)) {
+                return false;
             }
         }
         return true;
