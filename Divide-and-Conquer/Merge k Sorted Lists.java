@@ -2,7 +2,7 @@
 Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 */
 
-public class Solution {
+public class Solution1 {
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists.length == 0) return null;
         if (lists.length == 1) return lists[0];
@@ -36,6 +36,26 @@ public class Solution {
             current.next = l2;
             current = l2;
             l2 = l2.next;
+        }
+        return dummy.next;
+    }
+}
+
+public class Solution2 {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>((a, b) -> {
+            return a.val - b.val;
+        });
+        for (ListNode head : lists) {
+            if (head != null) minHeap.add(head);
+        }
+        ListNode dummy = new ListNode(0), current = dummy;
+        while (!minHeap.isEmpty()) {
+            current.next = minHeap.poll();
+            current = current.next;
+            if (current.next != null) {
+                minHeap.add(current.next);
+            }
         }
         return dummy.next;
     }
