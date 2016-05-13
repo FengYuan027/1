@@ -1,4 +1,4 @@
-public class Solution {
+public class Solution1 {
     public List<int[]> getSkyline(int[][] buildings) {
         return mergeBuilding(buildings, 0, buildings.length - 1);
     }
@@ -28,5 +28,40 @@ public class Solution {
         while (leftI < left.size()) merged.add(left.get(leftI++));
         while (rightI < right.size()) merged.add(right.get(rightI++));
         return merged;
+    }
+}
+
+public class Solution2 {
+    public List<int[]> getSkyline(int[][] buildings) {
+        List<int[]> skyline = new ArrayList<int[]>();
+        if (buildings.length == 0) return skyline;
+        List<int[]> points = new ArrayList<int[]>();
+        for (int[] building : buildings) {
+            points.add(new int[]{building[0], building[2]});
+            points.add(new int[]{building[1], -building[2]});
+        }
+        Collections.sort(points, (a, b) -> {
+            if (a[0] == b[0]) {
+                return Integer.compare(b[1], a[1]);
+            }
+            return Integer.compare(a[0], b[0]);
+        });
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>((a, b) -> (b - a));
+        maxHeap.add(0);
+        int prev = 0;
+        for (int[] point : points) {
+            if (point[1] > 0) {
+                maxHeap.offer(point[1]);
+            }
+            else {
+                maxHeap.remove(-point[1]);
+            }
+            int current = maxHeap.peek();
+            if (current != prev) {
+                skyline.add(new int[]{point[0], current});
+                prev = current;
+            }
+        }
+        return skyline;
     }
 }
