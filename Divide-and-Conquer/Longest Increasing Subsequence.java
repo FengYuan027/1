@@ -28,3 +28,18 @@ public class Solution1 {
         return maxLength;
     }
 }
+
+public class Solution2 {
+    public int lengthOfLIS(int[] nums) {
+        if (nums.length == 0) return 0;
+        int[] record = new int[nums.length];
+        int current = 0;
+        for (int num : nums) {
+            int index = current - 1;
+            while (index >= 0 && record[index] >= num) index--;
+            record[index+1] = num;
+            if (index + 1 == current) current++;
+        }
+        return current;
+    }
+}
