@@ -43,3 +43,26 @@ public class Solution2 {
         return current;
     }
 }
+
+public class Solution3 {
+    public int lengthOfLIS(int[] nums) {
+        if (nums.length == 0) return 0;
+        int[] record = new int[nums.length];
+        int current = 0;
+        for (int num : nums) {
+            int index = search(record, 0, current - 1, num);
+            record[index] = num;
+            if (index == current) current++;
+        }
+        return current;
+    }
+    
+    private int search(int[] record, int start, int end, int target) {
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (record[mid] >= target) end = mid - 1;
+            else start = mid + 1;
+        }
+        return start;
+    }
+}
