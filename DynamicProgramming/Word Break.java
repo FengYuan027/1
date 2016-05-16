@@ -8,7 +8,7 @@ dict = ["leet", "code"].
 Return true because "leetcode" can be segmented as "leet code".
 */
 
-public class Solution {
+public class Solution1 {
     public boolean wordBreak(String s, Set<String> wordDict) {
         int N = s.length();
         boolean[][] isMatch = new boolean[N+1][N+1];
@@ -19,5 +19,19 @@ public class Solution {
             }
         }
         return isMatch[0][N];
+    }
+}
+
+public class Solution2 {
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        int N = s.length();
+        boolean[] isMatch = new boolean[N+1];
+        isMatch[0] = true;
+        for (int i = 1; i <= N; i++) {
+            for (int j = i - 1; !isMatch[i] && j >= 0; j--) {
+                isMatch[i] = (wordDict.contains(s.substring(j, i)) && isMatch[j]);
+            }
+        }
+        return isMatch[N];
     }
 }
