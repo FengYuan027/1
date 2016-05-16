@@ -35,3 +35,26 @@ public class Solution2 {
         return isMatch[N];
     }
 }
+
+public class Solution3 {
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        HashSet<Integer> visited = new HashSet<Integer>();
+        queue.add(0);
+        while (!queue.isEmpty()) {
+            int index = queue.poll();
+            if (!visited.contains(index)) {
+                visited.add(index);
+                for (int i = index + 1; i <= s.length(); i++) {
+                    if (wordDict.contains(s.substring(index, i))) {
+                        if (i == s.length()) {
+                            return true;
+                        }
+                        queue.add(i);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
