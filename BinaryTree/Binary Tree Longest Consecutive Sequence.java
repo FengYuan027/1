@@ -22,7 +22,7 @@ Longest consecutive sequence path is 3-4-5, so return 3.
 Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
 */
 
-public class Solution {
+public class Solution1 {
     private int maxLength = 0;
     
     public int longestConsecutive(TreeNode root) {
@@ -37,5 +37,20 @@ public class Solution {
         if (root.right != null && root.right.val == root.val + 1) currentLength = Math.max(currentLength, rightLength + 1);
         maxLength = Math.max(maxLength, currentLength);
         return currentLength;
+    }
+}
+
+public class Solution2 {
+    public int longestConsecutive(TreeNode root) {
+        if (root == null) return 0;
+        return helper(root, 0, 0);
+    }
+    
+    private int helper(TreeNode root, int target, int currentLength) {
+        if (root.val != target) currentLength = 0;
+        currentLength++;
+        int leftLength = root.left != null ? helper(root.left, root.val + 1, currentLength) : 0;
+        int rightLength = root.right != null ? helper(root.right, root.val + 1, currentLength) : 0;
+        return Math.max(currentLength, Math.max(leftLength, rightLength));
     }
 }
