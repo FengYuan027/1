@@ -25,6 +25,9 @@ public class Solution {
                 return a.length() - b.length();
             }
         });
+        /* Alternative (Slow):
+        Arrays.sort(words, (a, b) -> (a.length() - b.length()));
+        */
         for (int i = 0; i < map.length; i++) {
             map[i] = getCode(words[i]);
         }
