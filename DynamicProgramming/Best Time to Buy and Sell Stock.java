@@ -34,3 +34,18 @@ public class SolutionIII {
         return sell2;
     }
 }
+
+
+// With Cooldown
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int buy = Integer.MIN_VALUE, sell = 0, rest = 0;
+        for (int price : prices) {
+            int previousBuy = buy;
+            buy = Math.max(buy, rest - price);
+            rest = sell;
+            sell = Math.max(sell, previousBuy + price);
+        }
+        return sell;
+    }
+}
