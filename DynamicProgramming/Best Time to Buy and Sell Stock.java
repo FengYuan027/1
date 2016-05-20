@@ -35,9 +35,53 @@ public class SolutionIII {
     }
 }
 
+// IV
+public class SolutionIV1 {
+    public int maxProfit(int k, int[] prices) {
+        if (k == 0) return 0;
+        if (k > prices.length / 2) {
+            int profit = 0;
+            for (int i = 1; i < prices.length; i++) profit += Math.max(0, prices[i] - prices[i-1]);
+            return profit;
+        }
+        int[][] profit = new int[k+1][prices.length];
+        for (int i = 1; i <= k; i++) {
+            int maxAfterBuy = -prices[0];
+            for (int j = 1; j < prices.length; j++) {
+                profit[i][j] = Math.max(profit[i][j-1], maxAfterBuy + prices[j]);
+                maxAfterBuy = Math.max(maxAfterBuy, profit[i-1][j-1] - prices[j]);
+            }
+        }
+        return profit[k][prices.length-1];
+    }
+}
+
+public class SolutionIV2 {
+    public int maxProfit(int k, int[] prices) {
+        if (k == 0) return 0;
+        if (k > prices.length / 2) {
+            int profit = 0;
+            for (int i = 1; i < prices.length; i++) profit += Math.max(0, prices[i] - prices[i-1]);
+            return profit;
+        }
+        int[] sell = new int[k+1], buy = new int[k+1];
+        for (int i = 0; i <= k; i++) buy[i] = Integer.MIN_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            for (int j = k; j > 0; j--) {
+                if (prices[i] + buy[j] > sell[j]) {
+                    sell[j] = prices[i] + buy[j];
+                }
+                if (sell[j-1] - prices[i] > buy[j]) {
+                    buy[j] = sell[j-1] - prices[i];
+                }
+            }
+        }
+        return sell[k];
+    }
+}
 
 // With Cooldown
-public class Solution {
+public class CooDwonSolution {
     public int maxProfit(int[] prices) {
         int buy = Integer.MIN_VALUE, sell = 0, rest = 0;
         for (int price : prices) {
