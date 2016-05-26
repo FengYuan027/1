@@ -36,3 +36,8 @@ public class Solution {
         return false;
     }
 }
+/*
+Unique Word Abbreviation
+1) If word's abbreviation is not in the dictionary
+2) If a word's abbreviation is in the dictionary, but not the same word
+*/
