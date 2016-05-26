@@ -1,0 +1,18 @@
+public class Solution {
+    public int longestConsecutive(TreeNode root) {
+        int[] maxLength = new int[1];
+        helper(root, maxLength);
+        return maxLength[0];
+    }
+    
+    private int helper(TreeNode root, int[] maxLength) {
+        if (root == null) return 0;
+        int currentLength = 1;
+        // Problem begin
+        if (root.left != null && root.left.val - 1 == root.val) currentLength += helper(root.left, maxLength);
+        if (root.right != null && root.right.val - 1 == root.val) currentLength = Math.max(currentLength, 1 + helper(root.right, maxLength));
+        // Problem end
+        maxLength[0] = Math.max(maxLength[0], currentLength);
+        return currentLength;
+    }
+}
