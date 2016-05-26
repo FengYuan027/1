@@ -16,3 +16,23 @@ public class Solution {
         return currentLength;
     }
 }
+
+// Flip Game II
+public class Solution {
+    public boolean canWin(String s) {
+        return canWin(s.toCharArray());
+    }
+    
+    private boolean canWin(char[] s) {
+        for (int i = 0; i < s.length - 1; i++) {
+            if (s[i] == '+' && s[i+1] == '+') {
+                s[i] = s[i+1] = '-';
+                // Begin
+                if (!canWin(s)) return true;
+                s[i] = s[i + 1] = '+';
+                // End
+            }
+        }
+        return false;
+    }
+}
