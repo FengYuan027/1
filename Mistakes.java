@@ -41,3 +41,40 @@ Unique Word Abbreviation
 1) If word's abbreviation is not in the dictionary
 2) If a word's abbreviation is in the dictionary, but not the same word
 */
+
+//Peeking Iterator
+class PeekingIterator implements Iterator<Integer> {
+    private Iterator<Integer> iterator;
+    private Integer next;
+    
+    private void peekNext() {
+        // Begin
+        if (iterator != null && iterator.hasNext()) next = iterator.next();
+        // End
+    }
+
+	public PeekingIterator(Iterator<Integer> iterator) {
+	    // initialize any member here.
+	    this.iterator = iterator;
+	    peekNext();
+	}
+
+    // Returns the next element in the iteration without advancing the iterator.
+	public Integer peek() {
+        return next;
+	}
+
+	// hasNext() and next() should behave the same as in the Iterator interface.
+	// Override them if needed.
+	@Override
+	public Integer next() {
+	    Integer nextValue = next;
+	    peekNext();
+	    return nextValue;
+	}
+
+	@Override
+	public boolean hasNext() {
+	    return next != null;
+	}
+}
