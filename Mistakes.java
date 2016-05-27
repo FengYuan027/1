@@ -78,3 +78,5 @@ class PeekingIterator implements Iterator<Integer> {
 	    return next != null;
 	}
 }
+
+// H-Index, H-Index II
