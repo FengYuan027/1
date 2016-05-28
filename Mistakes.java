@@ -80,3 +80,5 @@ class PeekingIterator implements Iterator<Integer> {
 }
 
 // H-Index, H-Index II
+
+// Factor Combinations
