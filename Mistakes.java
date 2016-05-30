@@ -82,3 +82,18 @@ class PeekingIterator implements Iterator<Integer> {
 // H-Index, H-Index II
 
 // Factor Combinations
+
+// Contains Duplicate
+public class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashSet<Integer> set = new HashSet<Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            // Begin
+            if (set.contains(nums[i])) return true;
+            if (i >= k) set.remove(nums[i-k]);
+            set.add(nums[i]);
+            // End
+        }
+        return false;
+    }
+}
