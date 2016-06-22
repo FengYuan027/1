@@ -3,8 +3,8 @@
 */
 
 class Solution {
-    public void reorderB(int[] A, int[] B) {
-    		if (A.length != B.length || A.length <= 1) return;
+	public void reorderB(int[] A, int[] B) {
+		if (A.length != B.length || A.length <= 1) return;
     		int N = A.length;
     		int[] indice = new int[N];
     		for (int i = 0; i < N; i++) indice[i] = i;
