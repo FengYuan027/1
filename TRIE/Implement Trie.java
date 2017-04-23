@@ -48,4 +48,8 @@ public class Trie {
         }
         return node;
     }
+    
+    public Sample {
+        System.out.write("Hello");
+    }
 }
